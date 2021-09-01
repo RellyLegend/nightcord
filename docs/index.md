@@ -21,7 +21,9 @@ You are now ready to use Nightcord, view the functions below.
 Functions:
 
 [YouTube](/nightcord/youtube)
+
 [Discord](/nightcord/discord)
+
 [Games](/nightcord/games)
 
 Join our [support server](https://discord.gg/W88aEhEbbq) for help on this package.
