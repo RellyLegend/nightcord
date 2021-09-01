@@ -18,7 +18,9 @@ You are now ready to use Nightcord, view the functions below.
 
 Functions:
 
-[YouTube](/youtube)
+[YouTube](/nightcord/youtube)
+[Discord](/nightcord/discord)
+[Games](/nightcord/games)
 
 Output:
 
