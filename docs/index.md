@@ -16,71 +16,9 @@ const Nightcord = require('nightcord');
 
 You are now ready to use Nightcord, view the functions below.
 
+Functions:
 
-### Get information from YouTube
-
-#### Video
-
-Using name:
-
-```js
-const Nightcord = require('nightcord');
-const YouTube = new Nightcord.YouTube();
-
-YouTube.getVideo("Alan Walker Faded").then(video => {
-    console.log(video.title)
-});
-```
-
-Output:
-```
-Alan Walker - Faded
-```
-
-Using Links:
-
-```js
-YouTube.getVideo("https://www.youtube.com/watch?v=60ItHLz5WEA").then(video => {
-    console.log(video.title)
-});
-```
-
-Output:
-```
-Alan Walker - Faded
-```
-
-`video` has the following properties:
-
-```js
-{
-    title: "Video title",
-    url: "Video Link",
-    id: "Video Link ID",
-    thumbnail: "Video Thumbnail Link",
-    duration: {
-        seconds: "Total seconds of in the video",
-        timestamp: "Total Duration/timestamp in video (example: 5:24)"
-    },
-    author: {
-        name: "The video's owner name",
-        channelURL: "The channel link of this video."
-    }
-}
-```
-
-### Playlist (using ID only)
-
-Using ID:
-
-```js
-const Nightcord = require('Nightcord');
-const YouTube = new Nightcord.YouTube();
-
-YouTube.getPlaylist("PLRBp0Fe2GpgmbpTy0fNGpoEtEzcDJ1IgQ").then(list => {
-    list.videos.forEach(video => console.log(video.title))
-});
-```
+[YouTube](/youtube)
 
 Output:
 
