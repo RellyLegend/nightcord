@@ -1,37 +1,206 @@
-## Welcome to GitHub Pages
+# Nightcord
 
-You can use the [editor on GitHub](https://github.com/RellyLegend/nightcord/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+Nightcord is a simple, helpful and easy-to-use package that retrieves information from specific websites.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+```npm i nightcord```
 
-### Markdown
+## Get started
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+To install nightcord on your own project, use `npm i nightcord`
 
-```markdown
-Syntax highlighted code block
+Define Nightcord:
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```js
+const Nightcord = require('nightcord');
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+You are now ready to use Nightcord, view the functions below.
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/RellyLegend/nightcord/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+### Get information from YouTube
 
-### Support or Contact
+#### Video
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Using name:
+
+```js
+const Nightcord = require('nightcord');
+const YouTube = new Nightcord.YouTube();
+
+YouTube.getVideo("Alan Walker Faded").then(video => {
+    console.log(video.title)
+});
+```
+
+Output:
+```
+Alan Walker - Faded
+```
+
+Using Links:
+
+```js
+YouTube.getVideo("https://www.youtube.com/watch?v=60ItHLz5WEA").then(video => {
+    console.log(video.title)
+});
+```
+
+Output:
+```
+Alan Walker - Faded
+```
+
+`video` has the following properties:
+
+```js
+{
+    title: "Video title",
+    url: "Video Link",
+    id: "Video Link ID",
+    thumbnail: "Video Thumbnail Link",
+    duration: {
+        seconds: "Total seconds of in the video",
+        timestamp: "Total Duration/timestamp in video (example: 5:24)"
+    },
+    author: {
+        name: "The video's owner name",
+        channelURL: "The channel link of this video."
+    }
+}
+```
+
+### Playlist (using ID only)
+
+Using ID:
+
+```js
+const Nightcord = require('Nightcord');
+const YouTube = new Nightcord.YouTube();
+
+YouTube.getPlaylist("PLRBp0Fe2GpgmbpTy0fNGpoEtEzcDJ1IgQ").then(list => {
+    list.videos.forEach(video => console.log(video.title))
+});
+```
+
+Output:
+
+```
+Unknown Brain - Faceless (ft. Marvin Divine & Bri Tolani) [NCS Lyrics]
+Unknown Brain - Jungle of Love (ft. Glaceo) [NCS Lyrics]
+Unknown Brain - Candy (ft. Linn Sandin) [NCS Lyrics]
+Unknown Brain - Blackhole (ft. Ava King) [NCS Lyrics]
+Unknown Brain - Blackhole (ft. Ava King) [NCS Lyrics]
+Unknown Brain - DEAD (ft. KAZHI) [NCS Lyrics]
+Unknown Brain - Oh Darling [NCS Lyrics]
+Unknown Brain - Dancing On The Moon ft. Luke Burr [NCS Lyrics]
+Unknown Brain - Hollywood Perfect (ft. NotEvenTanner) [NCS Lyrics]
+Unknown Brain - Forget You (ft. Shiah Maisel) [NCS Lyrics]
+Unknown Brain - Dance With Me (ft. Alexis Donn) [NCS Lyrics]
+Unknown Brain - Let You Go (ft. NotEvenTanner) [NCS Lyrics]
+Unknown Brain & Kyle Reynolds - I'm Sorry Mom [NCS Lyrics]
+Unknown Brain - Childhood Dreams [NCS Lyrics]
+Unknown Brain - Don't Bother (ft. Emily J) [NCS Lyrics]
+Unknown Brain - Last Thing (ft. Charlotte Sands) [NCS Lyrics]
+Unknown Brain & Hoober - Phenomenon (ft. Dax & VinDon) [NCS Lyrics]
+```
+
+`list` has the following properties:
+
+```js
+{
+    title: "Playlist Title",
+    id: "Playlist ID",
+    url: "Playlist Link",
+    videosCount: "Amount of videos in this playlist",
+    viewCount: "Amount of views altogether from the videos in this playlist",
+    createdDate: "Date of when the playlist was created",
+    videos: "Display all videos on this playlist and information in JSON.",
+    thumbnail: "Playlist Thumbnail Link",
+    author: {
+        name: "Playlist's channel name",
+        channelURL: "Playlist's channel URL"
+    }
+}
+```
+
+## Discord
+
+#### Discord Bot - Autopost stats to Discord Bot List (also known as top.gg)
+```js
+const Nightcord = require('nightcord');
+
+const Discord = require('discord.js');
+const client = new Discord.Client({ intents: [] }); // Put your bot's intents in [], like [Discord.Intents.FLAGS.GUILDS] or [Discord.Intents.FLAGS.GUILD_MESSAGES], or for both [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MESSAGES]
+
+const config = {
+    token: "Super secret bot token",
+    dbl: "Super secret top.gg token"
+};
+
+const dbl = new Nightcord.DBL(config.dbl, client)
+
+client.on('ready', () => {
+    console.log(`${client.user.tag} is ready!`); // Send message on console when the bot is ready.
+    dbl.autoPost.readyMessage('Stats posted!')
+    dbl.autoPost(); // Autopost stats to Top.gg
+});
+
+client.login(config.token);
+```
+
+After deploying the code, wait a few seconds and in your console, there will be a message saying that the autopost was successful.
+
+### Discord - Send Webhook messages & embed
+
+#### Message:
+
+```js
+const Nightcord = require('nightcord');
+const webhook = new Nightcord.Webhook("Your Discord Webhook URL");
+
+webhook.send("Hey! This is a webhook message.");
+```
+
+Output:
+
+![](https://cdn.discordapp.com/attachments/882169401594486796/882176875118592071/unknown.png)
+
+#### Embed:
+
+```js
+const Nightcord = require('nightcord');
+const webhook = new Nightcord.Webhook("Your Discord Webhook URL");
+const { MessageEmbed } = require('discord.js');
+
+const embed = new MessageEmbed()
+.setDescription(`Hey! This is a webhook message posted with Nightcord!`)
+.setColor(`BLURPLE`)
+.setFooter(`Made with Nightcord`);
+
+webhook.sendEmbed(embed);
+```
+
+Output:
+
+![](https://cdn.discordapp.com/attachments/882169401594486796/882177852588572672/unknown.png)
+
+### Games
+
+Setup
+
+```js
+const Nightcord = require('nightcord');
+const games = new Nightcord.Games();
+```
+
+Number Generator:
+
+```js
+const Nightcord = require('nightcord');
+const games = new Nightcord.Games();
+
+console.log(games.generateNumber(`5`, `10`);
+```
+
+Output will be a random number ranging from 5 to 10. 2 numbers (`generateNumber('first number', 'second number')`) are needed, Nightcord will randomly pick a number.
+Join our [support server](https://discord.gg/W88aEhEbbq) for help on this package.
