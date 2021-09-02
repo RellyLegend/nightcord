@@ -20,10 +20,10 @@ You are now ready to use Nightcord, view the functions below.
 
 Functions:
 
-[YouTube](/nightcord/youtube)
+[YouTube](/youtube)
 
-[Discord](/nightcord/discord)
+[Discord](/discord)
 
-[Games](/nightcord/games)
+[Games](/games)
 
 Join our [support server](https://discord.gg/W88aEhEbbq) for help on this package.
